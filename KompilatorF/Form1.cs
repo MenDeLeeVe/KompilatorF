@@ -24,7 +24,7 @@ namespace KompilatorF
             richTextBox3.Clear();
             if (komp.N == 0)
             {
-                richTextBox1.Text = komp.S;
+                richTextBox1.Text = komp.s;
                 foreach (KeyValuePair<string, float> per in komp.Peremennue)
                 {
                     richTextBox3.Text += $"Значение {per.Key} в десятичном формате: {per.Value}\n";
@@ -97,7 +97,7 @@ namespace KompilatorF
         { 7, "Ошибка, превышена допустимая глубина вложенности у скобкок '['" },
         { 8, "Ошибка, нераспознанный символ вместо ')'" },
         { 9, "Ошибка, нераспознанный символ вместо ']'" },
-        { 10, "Ошибка, нераспознанный символ" },
+        { 10, "Ошибка, не может идти 2 знака подряд" },
         { 11, "Ошибка, такой переменой не существует" },
         { 12, "Ошибка в написании переменной, недопустимый символ"},
         { 13, "Ошибка, на ноль делить нельзя"},
@@ -108,6 +108,8 @@ namespace KompilatorF
         { 18, "Ошибка в слове 'Метки'"},
         { 19, "Ошибка, отсутствует предполагаемая метка"},
         { 20, "Ошибка, после окончания кода находятся недопустимые символы"},
+        { 21, "Ошибка, после знака не может идти символ ')'"},
+        { 22, "Ошибка, после знака не может идти символ ']'"},
     };
         public Dictionary<string, float> Peremennue = new Dictionary<string, float>()
         {
@@ -385,7 +387,25 @@ namespace KompilatorF
             }
             else
             {
-                N = 10;
+                switch (s[k])
+                {
+                    case '+':
+                        N = 10;
+                        return rez;
+
+                    case '-':
+                        N = 10;
+                        return rez;
+
+                    case ')':
+                        N = 21;
+                        return rez;
+
+                    case ']':
+                        N = 22;
+                        return rez;
+                }
+                N = 1;
                 return rez;
             }
         }
@@ -461,9 +481,13 @@ namespace KompilatorF
         public float PravayaChast(ref string s, ref int k, ref int N)
         {
             float rez = 0;
+            int fla = 0;
+            int f = 0;
             if (s[k] != '-')
             {
                 s = s.Insert(k, "+");
+                fla = 1;
+                f = k;
             }
             do
             {
@@ -475,6 +499,11 @@ namespace KompilatorF
                         var rez1 = Blok1(ref s, ref k, ref N);
                         if (N != 0)
                         {
+                            if (fla == 1)
+                            {
+                                s = s.Remove(f, 1);
+                                k--;
+                            }
                             return rez;
                         }
                         rez += rez1;
@@ -487,14 +516,24 @@ namespace KompilatorF
                         var rez2 = Blok1(ref s, ref k, ref N);
                         if (N != 0)
                         {
+                            if (fla == 1)
+                            {
+                                s = s.Remove(f, 1);
+                                k--;
+                            }
                             return rez;
                         }
                         rez -= rez2;
                         Probely(ref s, ref k);
                         break;
-                }
+                }                               
             }
             while (s[k] == '+' | s[k] == '-');
+            if (fla == 1)
+            {
+                s = s.Remove(f, 1);
+                k--;
+            }
             return rez;
         }
 
