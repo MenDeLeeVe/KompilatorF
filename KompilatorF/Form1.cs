@@ -27,9 +27,10 @@ namespace KompilatorF
                 richTextBox1.Text = komp.s;
                 foreach (KeyValuePair<string, float> per in komp.Peremennue)
                 {
-                    richTextBox3.Text += $"Значение {per.Key} в десятичном формате: {per.Value}\n";
+                    richTextBox3.Text += $"Значение {per.Key} : {per.Value}\n";
                     //richTextBox3.Text += $"Значение {per.Key} в шестнадцетеричном формате: {komp.FloatToHex(per.Value)}\n";
-                }                
+                }
+                richTextBox3.Text += $"Код ошибки: {komp.N}\n";
             }
             else
             {
