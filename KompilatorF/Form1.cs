@@ -89,9 +89,9 @@ namespace KompilatorF
     {
         { 0, "Нет ошибки"},
         { 1, "Ошибка в написании, недопустимый символ"},
-        { 2, "Ошибка в написании числа, недопустимый символ"},
+        { 2, "Ошибка в написании числа, допустимы только вещественные числа"},
         { 3, "Ошибка в написании метки, недопустимый символ"},
-        { 4, "Ошибка в написании метки, недопустимый символ"},
+        { 4, "Ошибка в написании определения"},
         { 5, "Ошибка, переменная должна начинаться с буквы"},
         { 6, "Ошибка в написании числа, недопустимый символ" },
         { 7, "Ошибка, превышена допустимая глубина вложенности у скобкок '['" },
@@ -110,6 +110,7 @@ namespace KompilatorF
         { 20, "Ошибка, после окончания кода находятся недопустимые символы"},
         { 21, "Ошибка, после знака не может идти символ ')'"},
         { 22, "Ошибка, после знака не может идти символ ']'"},
+        { 23, "Ошибка, предыдущий оператор завершается на знак, либо уберите его, либо допишите оператор"},
     };
         public Dictionary<string, float> Peremennue = new Dictionary<string, float>()
         {
@@ -151,6 +152,7 @@ namespace KompilatorF
 
         public float Vezhestvennoe(ref string s, ref int k, ref int N)
         {
+            int g = k;
             var p = Seloe(ref s, ref k);
             if (p != "")
             {
@@ -177,20 +179,36 @@ namespace KompilatorF
                     }
                     else
                     {
+                        if (s[k] == ':')
+                        {
+                            N = 23;
+                            return 0;
+                        }
                         N = 6;
                         return 0;
                     }
                 }
                 else
                 {
+                    if (s[k] == ':')
+                    {
+                        N = 23;
+                        return 0;
+                    }
                     N = 2;
                     return 0;
                 }
             }
             else
             {
+                if (s[k] == ':')
+                {
+                    N = 23;
+                    return 0;
+                }
                 N = 1;
                 return 0;
+
             }
         }
 
@@ -230,6 +248,7 @@ namespace KompilatorF
 
         public string Peremennaa(ref string s, ref int k, ref int N)
         {
+
             int flag = 0;
             string nazvanie = string.Empty;
             for (int j = 0; j < alfavit.Length; j++)
@@ -300,6 +319,7 @@ namespace KompilatorF
         public float Blok3(ref string s, ref int k, ref int N)
         {
             float rez = 0;
+            int g = k;
             switch (s[k])
             {
                 case '(':
@@ -369,6 +389,19 @@ namespace KompilatorF
                 }
                 else
                 {
+                    if (per == "Анализ")
+                    {
+                        N = 23;
+                        k = g;
+                        return 0;
+                    }
+                    Probely(ref s, ref k);
+                    if (s[k] == '=')
+                    {
+                        N = 23;
+                        k = g;
+                        return 0;
+                    }
                     N = 11;
                     rez = 0;
                     return rez;
@@ -404,6 +437,13 @@ namespace KompilatorF
                     case ']':
                         N = 22;
                         return rez;
+                }
+
+                if (s[k] == ':')
+                {
+                    k = g;
+                    N = 23;
+                    return 0;
                 }
                 N = 1;
                 return rez;
