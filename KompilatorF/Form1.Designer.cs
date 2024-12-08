@@ -30,7 +30,6 @@
         {
             button1 = new Button();
             richTextBox1 = new RichTextBox();
-            richTextBox2 = new RichTextBox();
             richTextBox3 = new RichTextBox();
             SuspendLayout();
             // 
@@ -50,18 +49,9 @@
             richTextBox1.Font = new Font("Microsoft Sans Serif", 20.25F, FontStyle.Regular, GraphicsUnit.Point, 204);
             richTextBox1.Location = new Point(12, 12);
             richTextBox1.Name = "richTextBox1";
-            richTextBox1.Size = new Size(612, 410);
+            richTextBox1.Size = new Size(1149, 410);
             richTextBox1.TabIndex = 2;
             richTextBox1.Text = "";
-            // 
-            // richTextBox2
-            // 
-            richTextBox2.Font = new Font("Microsoft Sans Serif", 20.25F, FontStyle.Regular, GraphicsUnit.Point, 204);
-            richTextBox2.Location = new Point(630, 12);
-            richTextBox2.Name = "richTextBox2";
-            richTextBox2.Size = new Size(531, 410);
-            richTextBox2.TabIndex = 3;
-            richTextBox2.Text = "";
             // 
             // richTextBox3
             // 
@@ -78,7 +68,6 @@
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(1173, 714);
             Controls.Add(richTextBox3);
-            Controls.Add(richTextBox2);
             Controls.Add(richTextBox1);
             Controls.Add(button1);
             Name = "Form1";
@@ -91,7 +80,6 @@
 
         private Button button1;
         private RichTextBox richTextBox1;
-        private RichTextBox richTextBox2;
         private RichTextBox richTextBox3;
     }
 }

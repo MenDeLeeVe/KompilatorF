@@ -28,7 +28,7 @@ namespace KompilatorF
                 foreach (KeyValuePair<string, float> per in komp.Peremennue)
                 {
                     richTextBox3.Text += $"Значение {per.Key} в десятичном формате: {per.Value}\n";
-                    richTextBox3.Text += $"Значение {per.Key} в шестнадцетеричном формате: {komp.FloatToHex(per.Value)}\n";
+                    //richTextBox3.Text += $"Значение {per.Key} в шестнадцетеричном формате: {komp.FloatToHex(per.Value)}\n";
                 }                
             }
             else
@@ -86,39 +86,44 @@ namespace KompilatorF
         }
 
         public Dictionary<int, string> Oshibki = new Dictionary<int, string>()
-    {
-        { 0, "Нет ошибки"},
-        { 1, "Ошибка в написании, недопустимый символ"},
-        { 2, "Ошибка в написании числа, недопустимый символ"},
-        { 3, "Ошибка в написании метки, недопустимый символ"},
-        { 4, "Ошибка в написании метки, недопустимый символ"},
-        { 5, "Ошибка, переменная должна начинаться с буквы"},
-        { 6, "Ошибка в написании числа, недопустимый символ" },
-        { 7, "Ошибка, превышена допустимая глубина вложенности у скобкок '['" },
-        { 8, "Ошибка, нераспознанный символ вместо ')'" },
-        { 9, "Ошибка, нераспознанный символ вместо ']'" },
-        { 10, "Ошибка, не может идти 2 знака подряд" },
-        { 11, "Ошибка, такой переменой не существует" },
-        { 12, "Ошибка в написании переменной, недопустимый символ"},
-        { 13, "Ошибка, на ноль делить нельзя"},
-        { 14, "Ошибка, ожидалось '=', возможно допущена ошибка в переменной"},
-        { 15, "Ошибка, множество должно начинаться со слова 'Анализ'"},
-        { 16, "Ошибка в слове 'Анализ'"},
-        { 17, "Ошибка, определение должно начинаться со слова 'Метки'"},
-        { 18, "Ошибка в слове 'Метки'"},
-        { 19, "Ошибка, отсутствует предполагаемая метка"},
-        { 20, "Ошибка, после окончания кода находятся недопустимые символы"},
-        { 21, "Ошибка, после знака не может идти символ ')'"},
-        { 22, "Ошибка, после знака не может идти символ ']'"},
-    };
+        {
+            { 0, "Нет ошибки"},
+            { 1, "Ошибка в написании, недопустимый символ"},
+            { 2, "Ошибка в написании числа, недопустимый символ"},
+            { 3, "Ошибка в написании метки, недопустимый символ"},
+            { 4, "Ошибка в написании метки, допустимы только целые числа"},
+            { 5, "Ошибка, переменная должна начинаться с буквы"},
+            { 6, "Ошибка в написании числа, недопустимый символ" },
+            { 7, "Ошибка, превышена допустимая глубина вложенности 3 у скобкок '['" },
+            { 8, "Ошибка, нераспознанный символ вместо ')'" },
+            { 9, "Ошибка, нераспознанный символ вместо ']'" },
+            { 10, "Ошибка, не может идти 2 знака подряд" },
+            { 11, "Ошибка, такой переменой не существует" },
+            { 12, "Ошибка в написании переменной, недопустимый символ"},
+            { 13, "Ошибка, на ноль делить нельзя"},
+            { 14, "Ошибка, ожидалось '=', возможно допущена ошибка в переменной"},
+            { 15, "Ошибка, множество должно начинаться со слов 'First' или 'Second'"},
+            { 16, "Ошибка в слове 'First' или 'Second'"},
+            { 17, "Ошибка, определение должно начинаться либо со слова 'real', либо 'integer'"},
+            { 18, "Ошибка либо в слове 'real', либо 'integer'"},
+            { 19, "Ошибка, отсутствует символ ':'"},
+            { 20, "Ошибка, код заканчивается словом 'END'"},
+            { 21, "Ошибка, после знака не может идти символ ')'"},
+            { 22, "Ошибка, после знака не может идти символ ']'"},
+            { 23, "Ошибка, вторым символом переменной должна быть цифра"},
+            { 24, "Ошибка, пропущен символ ';'"},
+            { 25, "Ошибка в написании, должно быть целое число" },
+            { 26, "Ошибка, код начинается словом 'BEGIN'"},
+            { 27, "Ошибка, символы после окончания кода"},
+        };
         public Dictionary<string, float> Peremennue = new Dictionary<string, float>()
         {
 
         };
 
-        char[] alfavit = { 'а', 'б', 'в', 'г', 'д', 'е', 'ё', 'ж', 'з', 'и', 'й', 'к', 'л', 'м', 'н', 'о', 'п', 'р', 'с', 'т', 'у', 'ф', 'ц', 'ч', 'ш', 'щ', 'ъ', 'ы', 'ь', 'э', 'ю', 'я',
-                           'А', 'Б', 'В', 'Г', 'Д', 'Е', 'Ё', 'Ж', 'З', 'И', 'Й', 'К', 'Л', 'М', 'Н', 'О', 'П', 'Р', 'С', 'Т', 'У', 'Ф', 'Ц', 'Ч', 'Ш', 'Щ', 'Ъ', 'Ы', 'Ь', 'Э', 'Ю', 'Я' };
-        char[] arifmetica = { '0', '1', '2', '3', '4', '5', '6', '7', '8', '9', 'A', 'B', 'C', 'D', 'E', 'F' };
+        char[] alfavit = { 'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z',
+                           'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z' };
+        char[] arifmetica = { '0', '1', '2', '3', '4', '5', '6', '7', '8', '9'};
 
         public string Seloe(ref string s, ref int k)
         {
@@ -194,7 +199,7 @@ namespace KompilatorF
             }
         }
 
-        public string Metka(ref string s, ref int k, ref int N)
+        /*public string Metka(ref string s, ref int k, ref int N)
         {
             int nach = k;
             var p = Seloe(ref s, ref k);
@@ -226,7 +231,7 @@ namespace KompilatorF
                 string rez = s.Substring(nach, k);
                 return rez;
             }
-        }
+        }*/
 
         public string Peremennaa(ref string s, ref int k, ref int N)
         {
@@ -237,65 +242,73 @@ namespace KompilatorF
                 if (s[k] == alfavit[j])
                 {
                     flag = 1;
+                    nazvanie += s[k];
+                    k++;
                     break;
                 }
             }
-            if (flag == 1)
-            {
-                nazvanie += s[k];
-                k++;
-                int i;
-                for (i = k; i < s.Length; i++)
-                {
-                    flag = 0;
-                    for (int j = 0; j < arifmetica.Length; j++)
-                    {
-                        if (s[i] == arifmetica[j])
-                        {
-                            flag = 1;
-                            break;
-                        }
-                    }
-                    if (flag == 1)
-                    {
-                        nazvanie += s[i];
-                        continue;
-                    }
-                    flag = 0;
-                    for (int j = 0; j < alfavit.Length; j++)
-                    {
-                        if (s[i] == alfavit[j])
-                        {
-                            flag = 1;
-                            break;
-                        }
-                    }
-                    if (flag == 1)
-                    {
-                        nazvanie += s[i];
-                        continue;
-                    }
-                    else
-                    {
-                        break;
-                    }
-                }
-                k += (i - k);
-                /*if (alfavit.Contains(s[k+1]) | arifmetica.Contains(s[k+1]))
-                {
-                    N = 12;
-                    return "error";
-
-                }*/
-                N = 0;
-                return nazvanie;
-            }
-            else
+            if(flag == 0)
             {
                 N = 5;
                 return "error";
             }
-        }
+            flag = 0;
+            for (int j = 0; j < arifmetica.Length; j++)
+            {
+                if (s[k] == arifmetica[j])
+                {
+                    flag = 1;
+                    nazvanie += s[k];
+                    k++;
+                    break;
+                }
+            }
+            if (flag == 0)
+            {
+                N = 23;
+                return "error";
+            }
+            int i;
+            for (i = k; i < s.Length; i++)
+            {
+                flag = 0;
+                for (int j = 0; j < arifmetica.Length; j++)
+                {
+                    if (s[i] == arifmetica[j])
+                    {
+                        flag = 1;
+                        break;
+                    }
+                }
+                if (flag == 1)
+                {
+                    nazvanie += s[i];
+                    continue;
+                }
+                flag = 0;
+                for (int j = 0; j < alfavit.Length; j++)
+                {
+                    if (s[i] == alfavit[j])
+                    {
+                        flag = 1;
+                        break;
+                    }
+                }
+                if (flag == 1)
+                {
+                    nazvanie += s[i];
+                    continue;
+                }
+                else
+                {
+                    break;
+                }
+            }
+            k += (i - k);               
+            N = 0;
+            return nazvanie;
+        }            
+        
 
         public float Blok3(ref string s, ref int k, ref int N)
         {
@@ -326,7 +339,7 @@ namespace KompilatorF
                     }
                 case '[':
                     G++;
-                    if (G > 2)
+                    if (G > 3)
                     {
                         N = 7;
                         rez = 0;
@@ -540,11 +553,26 @@ namespace KompilatorF
         public float Operator(ref string s, ref int k, ref int N)
         {
             float rez = 0;
-            var metka = Metka(ref s, ref k, ref N);
-            if (N != 0)
+            //var metka = Metka(ref s, ref k, ref N);
+            if (s[k] == ';')
             {
+                k++;
+            }
+            Probely(ref s, ref k);
+            string p = Seloe(ref s, ref k);
+            if (p == "")
+            {
+                N = 4;
                 return rez;
             }
+            Probely(ref s, ref k);
+            if (s[k] != ':')
+            {
+                N = 19;
+                return rez;
+            }
+            k++;
+            Probely(ref s, ref k);
             var perem = Peremennaa(ref s, ref k, ref N);
             if (N != 0)
             {
@@ -576,59 +604,115 @@ namespace KompilatorF
 
         public float Mnozhestvo(ref string s, ref int k, ref int N)
         {
-            if (s[k] != 'А')
+            if (arifmetica.Contains(s[k]))
+            {
+                N = 24;
+                return 0; ;
+            }           
+            if (s[k] != 'F' && s[k] != 'S')
             {
                 N = 15;
                 return 0;
             }
-            if (s.Substring(k, 6) != "Анализ")
+            if (s.Substring(k, 5) != "First" && s.Substring(k, 6) != "Second")
             {
                 N = 16;
                 return 0;
             }
-            k += 5;
-            do
+            if (s.Substring(k, 5) == "First")
             {
-                k++;
-                Probely(ref s, ref k);
-                Seloe(ref s, ref k);
-                Probely(ref s, ref k);
+                k += 4;
+                do
+                {
+                    k++;
+                    Probely(ref s, ref k);
+                    string p = Seloe(ref s, ref k);
+                    if (p == "")
+                    {
+                        N = 25;
+                        return 0;
+                    }
+                    Probely(ref s, ref k);
+                }
+                while (s[k] == ',');
             }
-            while (s[k] == ',');
+            if (s.Substring(k, 6) == "Second")
+            {
+                k += 5;
+                do
+                {
+                    k++;
+                    Probely(ref s, ref k);
+                    Vezhestvennoe(ref s, ref k, ref N);
+                    if (N != 0)
+                    {
+                        return 0;
+                    }
+                    Probely(ref s, ref k);
+                }
+                while (s[k] == ';');
+            }
             return 1;
         }
 
         public float Opredelenie(ref string s, ref int k, ref int N)
         {
-            if (s[k] != 'М')
+            if (s[k] != 'r' && s[k] != 'i')
             {
-                N = 17;
+                N = 17;                
                 return 0;
-            }
-            if (s.Substring(k, 5) != "Метки")
+            }            
+            if (s.Substring(k, 4) != "real" && s.Substring(k, 7) != "integer")
             {
                 N = 18;
                 return 0;
             }
-            k += 4;
-            do
+            if (s.Substring(k, 4) == "real")
             {
-                k++;
-                Probely(ref s, ref k);
-                Vezhestvennoe(ref s, ref k, ref N);
-                if (N != 0)
+                k += 3;
+                do
                 {
-                    return 0;
+                    k++;
+                    Probely(ref s, ref k);
+                    Vezhestvennoe(ref s, ref k, ref N);
+                    if (N != 0)
+                    {
+                        return 0;
+                    }
+                    Probely(ref s, ref k);
                 }
-                Probely(ref s, ref k);
+                while (s[k] == ';');
             }
-            while (s[k] == ';');
+            if (s.Substring(k, 7) == "integer")
+            {
+                k += 6;
+                do
+                {
+                    k++;
+                    Probely(ref s, ref k);
+                    string p = Seloe(ref s, ref k);
+                    if (p == "")
+                    {
+                        N = 25;
+                        return 0;
+                    }
+                    Probely(ref s, ref k);
+                }
+                while (s[k] == ',');
+            }           
             return 1;
         }
 
         public bool Kompil()
         {
-            s += "k      ";
+            s += "      k";
+            Probely(ref s, ref kursor);
+            if (s.Substring(kursor, 5) != "BEGIN")
+            {
+                N = 26;
+                return false;
+            }
+            kursor += 5;
             Probely(ref s, ref kursor);
 
             do
@@ -640,7 +724,7 @@ namespace KompilatorF
                 }
                 Probely(ref s, ref kursor);
             }
-            while (s.Substring(kursor, 5) == "Метки");
+            while (s.Substring(kursor, 4) == "real" | s.Substring(kursor, 7) == "integer");
 
             do
             {
@@ -651,7 +735,7 @@ namespace KompilatorF
                 }
                 Probely(ref s, ref kursor);
             }
-            while (s.Substring(kursor, 6) != "Анализ");
+            while (s[kursor] == ';');
 
             do
             {
@@ -662,14 +746,22 @@ namespace KompilatorF
                 }
                 Probely(ref s, ref kursor);
             }
-            while (s.Substring(kursor, 6) == "Анализ");
+            while (s.Substring(kursor, 3) != "END");
 
-            if (s[kursor] != 'k')
+            if (s.Substring(kursor, 3) != "END")
             {
                 N = 20;
                 return false;
-            }      
+            }
+            kursor += 3;
+            Probely(ref s, ref kursor);
+            if (s[kursor] != 'k')
+            {
+                N = 27;
+                return false;
+            }
             return true;
+
         }
 
         public Kompilator(string s)
